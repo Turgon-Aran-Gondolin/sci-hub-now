@@ -116,10 +116,12 @@ function executeJs() {
 browser.action.onClicked.addListener(executeJs);
 
 // Context menus (right click)
-browser.contextMenus.create({
-  id: "doi-selection",
-  title: "Find article by DOI!",
-  contexts: ["selection", "link"],
+chrome.runtime.onInstalled.addListener(() => {
+  browser.contextMenus.create({
+    id: "doi-selection",
+    title: "Find article by DOI!",
+    contexts: ["selection", "link"],
+  });
 });
 browser.contextMenus.onClicked.addListener((info, tab) => {
   // if right-clicked on link, then parse link address first
